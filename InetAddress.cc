@@ -31,9 +31,3 @@ std::string InetAddress::toIpPort() const
     return buf;
 }
 
-int main()
-{
-    InetAddress addr(8888);
-    std::cout<<addr.toIpPort()<<std::endl;
-    return 0;
-}

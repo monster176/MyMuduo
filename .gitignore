@@ -1,0 +1,17 @@
+# 编译产物
+build/
+cmake-build-*/
+*.o
+*.a
+*.so
+*.exe
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.user
+
+# 系统
+.DS_Store
+Thumbs.db

@@ -4,9 +4,7 @@
 #include <string>
 #include <cstdint>
 
-#include "noncopyable.h"
-
-class TimeStamp : noncopyable
+class TimeStamp 
 {
 public:
     TimeStamp();

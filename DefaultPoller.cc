@@ -1,4 +1,5 @@
 #include "Poller.h"
+#include "EPollPoller.h"
 
 #include <stdlib.h>
 
@@ -12,6 +13,6 @@ Poller* Poller::newDefaultPoller(EventLoop *loop)
     else
     {
         // 返回EPOLL的接口
-        return nullptr;
+        return new EPollPoller(loop);
     }
 }

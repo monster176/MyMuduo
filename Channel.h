@@ -53,7 +53,7 @@ public:
     bool isWriting() const {return events_ & kwriteEvent;}
     bool isNone() const    {return events_ & knoneEvent;}
 
-    EventLoop ownerLoop() {return Loop_;} 
+    EventLoop* ownerLoop() {return Loop_;} 
     void remove();
 
 private:
@@ -64,7 +64,7 @@ private:
     static const int kreadEvent;
     static const int kwriteEvent;
 
-    EventLoop Loop_;   // 事件循环
+    EventLoop* Loop_;   // 事件循环
     const int fd_;      // Poller监听的是哪个文件
     int events_;        // 发生的具体的事件
     int revents_;       // 真正发生的事件

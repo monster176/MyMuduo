@@ -34,7 +34,36 @@ void Socket::listen()
 
 int Socket::accept(InetAddress *peeraddr)
 {
+    LogINFO("DEBUG OUT => int Socket::accept(InetAddress *peeraddr) \n");
 
+    sockaddr_in addr;
+    socklen_t len = sizeof(addr);
+    bzero(&addr,sizeof addr);
+    int connfd = ::accept4(sockfd_,(sockaddr*)&addr,&len,SOCK_NONBLOCK|SOCK_CLOEXEC);
+
+    // // 检查非阻塞模式和 CLOEXEC 标志
+    // int flag = ::fcntl(sockfd_, F_GETFL, 0);
+    // if (flag < 0) return -1;
+    // if (!(flag & O_NONBLOCK)) {
+    //     flag |= O_NONBLOCK;
+    //     if (::fcntl(sockfd_, F_SETFL, flag) < 0) return -1;
+    // }
+
+    // flag = ::fcntl(sockfd_, F_GETFD, 0);
+    // if (flag < 0) return -1;
+    // if (!(flag & O_CLOEXEC)) {
+    //     flag |= O_CLOEXEC;
+    //     if (::fcntl(sockfd_, F_SETFD, flag) < 0) return -1;
+    // }
+
+    // int connfd = ::accept(sockfd_, (sockaddr *)&addr, &len);
+    if(connfd>=0)
+    {
+        peeraddr->setSockAddr(addr);
+    }
+    LogDEBUG("Socket::accept connfd = %d ==========> OK",connfd);
+    
+    return connfd;
 }
 
 void Socket::shutdownWrite()
